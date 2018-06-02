@@ -1,15 +1,39 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li routerLinkActive="active"><a routerLink="auth">Authentification</a></li>
+        <li routerLinkActive="active"><a routerLink="appareils">Appareils</a></li>
+        <li routerLinkActive="active"><a routerLink="edit">Nouvel appareil </a></li>
+        <li routerLinkActive="active"><a routerLink="users">Utilisateur</a></li>
+      </ul>
+      <div class="navbar-right">
+        <p>vous êtes connecté depuis {{ secondes}} secondes !</p>
+      </div>
+  </div>
+
+</nav>
 <div class="container">
   <div class="row">
+      <router-outlet></router-outlet>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <!--  <div class="row">
     <div class="col-xs-12">
-        <h1>Posts</h1>
-
-       <!--   <p> Mise à jour : {{ lastUpdate | async | date: 'yMMMMEEEEd' | uppercase }}</p>
-          <ul class="list-group">
-              <app-appareil *ngFor="let appareil of appareils"
-                            [appareilName]="appareil.name"
-                            [appareilStatus]="appareil.status"></app-appareil>
-
-          </ul> -->
       <ul class="list-group">
         <app-post *ngFor="let post of posts"
                   [title]="post.title"
@@ -21,5 +45,5 @@
 
 
     </div>
-  </div>
+  </div>  -->
 </div>

@@ -1,40 +1,38 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {reject} from 'q';
 import DateTimeFormat = Intl.DateTimeFormat;
+import {AppareilService} from './services/appareil.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/interval';
+import {Subscription} from 'rxjs/Subscription';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-    isAuth = false ;
+export class AppComponent implements  OnInit , OnDestroy{
 
-    lastUpdate = new Promise(
-      (resolve,reject) => {
-        const date = new Date();
-        setTimeout(
-          () => {
-            resolve(date);
-          },2000
-        );
-      }
-    )
+  secondes: number;
+  counterSubscription: Subscription ;
+   constructor() {}
 
-    appareils = [
-    {
-      name: 'Machine à lavé',
-      status: 'éteint'
-    },
-    {
-      name: 'télévision',
-      status: 'allumé'
-    },
-    {
-      name: 'Ordinateur',
-        status: 'éteint'
+    ngOnInit(){
+      const  counter = Observable.interval(1000);
+      this.counterSubscription = counter.subscribe(
+        (value: number) => {
+          this.secondes = value ;
+        }
+      );
+
     }
-    ];
+
+    ngOnDestroy(){
+      this.counterSubscription.unsubscribe();
+    }
+
+
   date = new Date() ;
 
     posts = [
@@ -61,15 +59,5 @@ export class AppComponent {
 
 
 
-    constructor() {
 
-      setTimeout(
-        () => {
-          this.isAuth = true;
-        }, 4000
-      );
-    }
-    onAllumer(){
-      console.log("on allume tout ");
-    }
 }
